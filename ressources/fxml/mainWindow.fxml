@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMain">
+   <children>
+      <MenuBar>
+        <menus>
+            <Menu mnemonicParsing="false" text="Fichier">
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#nouveau" text="Nouveau" />
+                <MenuItem mnemonicParsing="false" onAction="#sauvegarder" text="Sauvegarder" />
+                  <MenuItem mnemonicParsing="false" onAction="#sauvegarderSous" text="Sauvegarder sous" />
+                  <MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Action">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#fenetreTranslation" text="Translation" />
+              <MenuItem mnemonicParsing="false" onAction="#fenetreHomothetie" text="Homothétie" />
+                  <MenuItem mnemonicParsing="false" onAction="#fenetreRotation" text="Rotation" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#animer" text="Animation" />
+                  <MenuItem mnemonicParsing="false" onAction="#matrice" text="Matrice" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Pane fx:id="grille" prefHeight="422.0" prefWidth="600.0">
+         <children>
+            <Slider fx:id="zoomSlider" layoutX="500.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" value="50.0" />
+            <CheckBox fx:id="buttonGrille" layoutX="534.0" layoutY="348.0" mnemonicParsing="false" onAction="#apply" text="Grille" />
+         </children>
+      </Pane>
+   </children>
+</VBox>

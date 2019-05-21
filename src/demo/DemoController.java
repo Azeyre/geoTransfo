@@ -34,9 +34,9 @@ public class DemoController {
         Construction de la composition
          */
         composition = new Composition();
-        composition.add(new Translation(1.0, 1.0));                // Etape 0 -> Etape 1
-        composition.add(new Rotation(180.0, 3.0, 2.0));     // Etape 1 -> Etape 2
-        composition.add(new Translation(2.0, -2.0));                // Etape 2 -> Etape 3
+        composition.add(new Translation(1.0, 1.0));        // Etape 0 -> Etape 1
+        composition.add(new Rotation(180.0, 3.0, 2.0));    // Etape 1 -> Etape 2
+        composition.add(new Translation(2.0, -2.0));       // Etape 2 -> Etape 3
 
         pane.getChildren().add(composition.getGrille());
     }
