@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import transforms.IComposition;
 
 public class Main extends Application {
 
@@ -20,7 +21,6 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
-			
 			URL url = new File("ressources/fxml/mainWindow.fxml").toURL();
 			Parent settings = FXMLLoader.load(url);
 			primaryStage.setScene(new Scene(settings));

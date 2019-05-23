@@ -5,35 +5,43 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMain">
+<StackPane fx:id="grille" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showCoord" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMain">
    <children>
-      <MenuBar>
-        <menus>
+      <CheckBox fx:id="buttonGrille" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#apply" text="Grille">
+         <StackPane.margin>
+            <Insets bottom="5.0" right="5.0" />
+         </StackPane.margin></CheckBox>
+      <MenuBar fx:id="menuBar" maxWidth="1.7976931348623157E308">
+         <menus>
             <Menu mnemonicParsing="false" text="Fichier">
-              <items>
+               <items>
                   <MenuItem mnemonicParsing="false" onAction="#nouveau" text="Nouveau" />
-                <MenuItem mnemonicParsing="false" onAction="#sauvegarder" text="Sauvegarder" />
+                  <MenuItem mnemonicParsing="false" onAction="#sauvegarder" text="Sauvegarder" />
                   <MenuItem mnemonicParsing="false" onAction="#sauvegarderSous" text="Sauvegarder sous" />
                   <MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
-              </items>
+               </items>
             </Menu>
-          <Menu mnemonicParsing="false" text="Action">
-            <items>
+            <Menu mnemonicParsing="false" text="Action">
+               <items>
                   <MenuItem mnemonicParsing="false" onAction="#fenetreTranslation" text="Translation" />
-              <MenuItem mnemonicParsing="false" onAction="#fenetreHomothetie" text="Homothétie" />
+                  <MenuItem mnemonicParsing="false" onAction="#fenetreHomothetie" text="Homothétie" />
                   <MenuItem mnemonicParsing="false" onAction="#fenetreRotation" text="Rotation" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#animer" text="Animation" />
                   <MenuItem mnemonicParsing="false" onAction="#matrice" text="Matrice" />
-            </items>
-          </Menu>
-        </menus>
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Objet">
+               <items>
+                  <MenuItem fx:id="ajoutPoint" mnemonicParsing="false" text="Point" />
+                  <MenuItem fx:id="ajoutCarre" mnemonicParsing="false" text="Carré" />
+               </items>
+            </Menu>
+         </menus>
       </MenuBar>
-      <Pane fx:id="grille" prefHeight="422.0" prefWidth="600.0">
-         <children>
-            <Slider fx:id="zoomSlider" layoutX="500.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" value="50.0" />
-            <CheckBox fx:id="buttonGrille" layoutX="534.0" layoutY="348.0" mnemonicParsing="false" onAction="#apply" text="Grille" />
-         </children>
-      </Pane>
+      <Slider fx:id="zoomSlider" max="80.0" maxHeight="-Infinity" maxWidth="-Infinity" min="20.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" value="50.0">
+         <StackPane.margin>
+            <Insets top="5.0" />
+         </StackPane.margin></Slider>
    </children>
-</VBox>
+</StackPane>

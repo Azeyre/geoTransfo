@@ -1,23 +1,25 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import transforms.élémentaires.Translation;
 
 public class ControllerTranslation {
 	
-	@FXML Button button;
 	@FXML TextField X;
 	@FXML TextField Y;
 	
-	public void affiche() {
-		
-	}
-	
 	public void apply() {
-		Stage stage  = (Stage) X.getScene().getWindow();
-		stage.close();
+		try {
+			double x = Double.valueOf(X.getText());
+			double y = Double.valueOf(Y.getText());
+			ControllerMain.ajouter(new Translation(x,y));
+			Stage s = (Stage) X.getScene().getWindow();
+			s.close();
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

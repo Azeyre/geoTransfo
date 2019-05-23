@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="119.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerTranslation">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="119.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerTranslation">
    <children>
       <HBox prefHeight="50.0" prefWidth="250.0">
          <children>
@@ -23,7 +23,7 @@
                   <Insets left="50.0" top="15.0" />
                </HBox.margin>
             </Label>
-            <TextField prefHeight="17.0" prefWidth="43.0">
+            <TextField fx:id="X" prefHeight="17.0" prefWidth="43.0">
                <HBox.margin>
                   <Insets left="5.0" top="10.0" />
                </HBox.margin>
@@ -33,7 +33,7 @@
                   <Insets left="20.0" top="15.0" />
                </HBox.margin>
             </Label>
-            <TextField prefHeight="17.0" prefWidth="45.0">
+            <TextField fx:id="Y" prefHeight="17.0" prefWidth="45.0">
                <HBox.margin>
                   <Insets left="5.0" top="10.0" />
                </HBox.margin>
