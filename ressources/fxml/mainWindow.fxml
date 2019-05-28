@@ -7,7 +7,6 @@
 
 <StackPane fx:id="grille" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showCoord" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMain">
    <children>
-      <Pane fx:id="pane" prefHeight="377.0" prefWidth="600.0" />
       <CheckBox fx:id="buttonGrille" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#apply" text="Grille">
          <StackPane.margin>
             <Insets bottom="5.0" right="5.0" />
