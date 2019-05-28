@@ -134,7 +134,8 @@ public class ControllerMain {
 	}
 	
 	public void quitter() {
-		System.out.println("Quitter");
+		Stage s = (Stage) zoomSlider.getScene().getWindow();
+		s.close();
 	}
 	
 	public void animer() {
