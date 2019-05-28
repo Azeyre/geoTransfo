@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import graphics.Main;
@@ -18,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -52,6 +54,7 @@ public class ControllerMain {
 	public static ListView<String> list;
 	public static double xSaisie, ySaisie;
 	private static Pane pane;
+	public static String matrices;
 	
 	public void initialize() {
 		buttonGrille.setSelected(true);
@@ -70,21 +73,26 @@ public class ControllerMain {
         list.maxWidth(200);
         list.setPrefSize(200, 300);
         pane.getChildren().add(list);
+        list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         list.setOnKeyPressed(e -> {
         	KeyCode k = e.getCode();
-        	if(k.equals(KeyCode.DELETE) && list.getSelectionModel().getSelectedIndex() != -1) {
-        		pane.getChildren().removeAll(allNodes);
-        		composition.getSequence().remove(list.getSelectionModel().getSelectedIndex());
-        		display.remove(list.getSelectionModel().getSelectedIndex());
-        		allNodes.remove(list.getSelectionModel().getSelectedIndex() + 1);
-        		try {
-        			allNodes = composition.draw(display);
-        		} catch (LibraryException ex) {
-        			ex.printStackTrace();
+        	List<Integer> listeSelectionnes = list.getSelectionModel().getSelectedIndices();
+        	if(k.equals(KeyCode.DELETE) && listeSelectionnes.size() != 0) {
+        		for(int i = listeSelectionnes.size()-1 ; i >= 0 ; i--) {
+        			int index = listeSelectionnes.get(i);
+        			pane.getChildren().removeAll(allNodes);
+            		composition.getSequence().remove(index);
+            		display.remove(index);
+            		allNodes.remove(index + 1);
+            		try {
+            			allNodes = composition.draw(display);
+            		} catch (LibraryException ex) {
+            			ex.printStackTrace();
+            		}
+            		pane.getChildren().addAll(allNodes);
+            		list.getItems().remove(index);
+            		nbTransition--;
         		}
-        		pane.getChildren().addAll(allNodes);
-        		list.getItems().remove(list.getSelectionModel().getSelectedIndex());
-        		nbTransition--;
         	}
         });
         
@@ -165,13 +173,26 @@ public class ControllerMain {
 	
 	public void matrice() {
 		try {
-			for(int i=0;i<nbTransition;i++) {
+			/*for(int i=0;i<nbTransition;i++) {
             System.out.println(Arrays.deepToString(composition.getAtomicMatrix(i))); 
-			}
+			}*/
             System.out.println(Arrays.deepToString(composition.getComposedMatrix(nbTransition)));
+            matrices = Arrays.deepToString(composition.getComposedMatrix(nbTransition));
         } catch (LibraryException e) {
             e.printStackTrace();
         }
+		Stage s;
+		try {
+			s = new Stage();
+			@SuppressWarnings("deprecation")
+			URL url = new File("ressources/fxml/matrices.fxml").toURL();
+			Parent settings = FXMLLoader.load(url);
+			s.setScene(new Scene(settings));
+			s.initModality(Modality.APPLICATION_MODAL);
+			s.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void fenetreTranslation() {
@@ -245,8 +266,6 @@ public class ControllerMain {
 		} catch (LibraryException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Nodes : " + allNodes.size());
 		pane.getChildren().addAll(allNodes);
-		System.out.println("Pane : " + pane.getChildren().size());
 	}
 }
