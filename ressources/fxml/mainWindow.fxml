@@ -18,8 +18,7 @@
             <Menu mnemonicParsing="false" text="Fichier">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#nouveau" text="Nouveau" />
-                  <MenuItem mnemonicParsing="false" onAction="#sauvegarder" text="Sauvegarder" />
-                  <MenuItem mnemonicParsing="false" onAction="#sauvegarderSous" text="Sauvegarder sous" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
                </items>
             </Menu>
