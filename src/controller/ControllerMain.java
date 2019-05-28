@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import graphics.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -114,19 +115,22 @@ public class ControllerMain {
 	}
 	
 	public void apply() {
-		System.out.println(buttonGrille.isSelected());
+		if (buttonGrille.isSelected()) {
+            pane.getChildren().addAll(allNodes);
+        } else {
+            pane.getChildren().removeAll(allNodes);
+        }
 	}
 	
 	public void nouveau() {
-		System.out.println("Nouveau");
-	}
-	
-	public void sauvegarder() {
-		System.out.println("Sauvegarde");
-	}
-	
-	public void sauvegarderSous() {
-		System.out.println("Sauvegarder sous");
+		Main newWindow = new Main();
+		Stage s = new Stage();
+		try {
+			newWindow.start(s);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Impossible de créer une nouvelle fenêtre !");
+		}
 	}
 	
 	public void quitter() {
