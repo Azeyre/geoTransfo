@@ -1,7 +1,9 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import transforms.elementaires.Translation;
 
@@ -9,6 +11,7 @@ public class ControllerTranslation {
 	
 	@FXML TextField X;
 	@FXML TextField Y;
+	@FXML Label erreur;
 	
 	public void apply() {
 		try {
@@ -18,7 +21,8 @@ public class ControllerTranslation {
 			Stage s = (Stage) X.getScene().getWindow();
 			s.close();
 		} catch(NumberFormatException e) {
-			e.printStackTrace();
+			erreur.setTextFill(Color.RED);
+			erreur.setText("Entrée invalide !");
 		}
 	}
 

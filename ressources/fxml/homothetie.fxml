@@ -5,8 +5,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="119.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerHomothetie">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="119.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerHomothetie">
    <children>
+      <Label fx:id="erreur" />
       <HBox prefHeight="50.0" prefWidth="250.0">
          <children>
             <Label text="Point X :">
@@ -14,7 +15,7 @@
                   <Insets left="10.0" top="15.0" />
                </HBox.margin>
             </Label>
-            <TextField prefHeight="17.0" prefWidth="43.0">
+            <TextField fx:id="X" prefHeight="17.0" prefWidth="43.0">
                <HBox.margin>
                   <Insets left="5.0" top="10.0" />
                </HBox.margin>
@@ -24,7 +25,7 @@
                   <Insets left="20.0" top="15.0" />
                </HBox.margin>
             </Label>
-            <TextField prefHeight="17.0" prefWidth="45.0">
+            <TextField fx:id="Y" prefHeight="17.0" prefWidth="45.0">
                <HBox.margin>
                   <Insets left="5.0" top="10.0" />
                </HBox.margin>
@@ -38,7 +39,7 @@
                   <Insets left="72.0" top="15.0" />
                </HBox.margin>
             </Label>
-            <TextField prefHeight="17.0" prefWidth="43.0">
+            <TextField fx:id="distance" prefHeight="17.0" prefWidth="43.0">
                <HBox.margin>
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
@@ -49,7 +50,7 @@
          <children>
             <Button mnemonicParsing="false" onAction="#apply" text="OK">
                <HBox.margin>
-                  <Insets left="110.0" top="10.0" />
+                  <Insets bottom="5.0" left="110.0" top="10.0" />
                </HBox.margin>
             </Button>
          </children>

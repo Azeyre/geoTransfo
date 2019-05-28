@@ -127,11 +127,33 @@ public class ControllerMain {
 	}
 	
 	public void fenetreRotation() {
-		System.out.println("Rotation");
+		Stage s;
+		try {
+			s = new Stage();
+			@SuppressWarnings("deprecation")
+			URL url = new File("ressources/fxml/rotation.fxml").toURL();
+			Parent settings = FXMLLoader.load(url);
+			s.setScene(new Scene(settings));
+			s.initModality(Modality.APPLICATION_MODAL);
+			s.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void fenetreHomothetie() {
-		System.out.println("Homothetie");
+		Stage s;
+		try {
+			s = new Stage();
+			@SuppressWarnings("deprecation")
+			URL url = new File("ressources/fxml/homothetie.fxml").toURL();
+			Parent settings = FXMLLoader.load(url);
+			s.setScene(new Scene(settings));
+			s.initModality(Modality.APPLICATION_MODAL);
+			s.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void ajoutPoint() {

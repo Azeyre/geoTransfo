@@ -5,37 +5,47 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerRotation">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="250.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRotation">
    <children>
-      <HBox prefHeight="50.0" prefWidth="250.0">
+      <Label fx:id="erreur" />
+      <HBox prefWidth="250.0">
          <children>
-            <HBox prefHeight="60.0" prefWidth="250.0">
-               <children>
-                  <Label text="Rotation :">
-                     <HBox.margin>
-                        <Insets left="67.0" top="15.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField prefHeight="17.0" prefWidth="43.0">
-                     <HBox.margin>
-                        <Insets left="10.0" top="10.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
+            <Label text="X :">
                <HBox.margin>
-                  <Insets top="10.0" />
+                  <Insets left="50.0" top="15.0" />
                </HBox.margin>
-            </HBox>
+            </Label>
+            <TextField fx:id="X" prefHeight="17.0" prefWidth="43.0">
+               <HBox.margin>
+                  <Insets left="5.0" top="10.0" />
+               </HBox.margin>
+            </TextField>
+            <Label text="Y :">
+               <HBox.margin>
+                  <Insets left="20.0" top="15.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="Y" prefHeight="17.0" prefWidth="45.0">
+               <HBox.margin>
+                  <Insets left="5.0" top="10.0" />
+               </HBox.margin>
+            </TextField>
          </children>
       </HBox>
-      <HBox prefHeight="50.0" prefWidth="250.0">
+      <HBox prefHeight="25.0" prefWidth="250.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#apply" text="OK">
+            <Label text="Rotation :">
                <HBox.margin>
-                  <Insets left="110.0" top="10.0" />
+                  <Insets left="67.0" top="15.0" />
                </HBox.margin>
-            </Button>
+            </Label>
+            <TextField fx:id="rotation" prefWidth="50.0">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </TextField>
          </children>
       </HBox>
+      <Button mnemonicParsing="false" onAction="#apply" text="OK" />
    </children>
 </VBox>
