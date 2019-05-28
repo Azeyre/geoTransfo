@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -17,6 +16,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -24,9 +25,9 @@ import javafx.stage.Stage;
 import transforms.Composition;
 import transforms.IComposition;
 import transforms.LibraryException;
+import transforms.elementaires.Transformation;
+import transforms.elementaires.Translation;
 import transforms.mobile.Motif;
-import transforms.élémentaires.Transformation;
-import transforms.élémentaires.Translation;
 
 public class ControllerMain {
 	
@@ -34,26 +35,30 @@ public class ControllerMain {
 	@FXML CheckBox buttonGrille;
 	@FXML StackPane grille;
 	@FXML MenuBar menuBar;
+	@FXML Pane pane;
 
-	private static IComposition composition;
+	public static IComposition composition;
 	private static List<Node> allNodes;
 	private static int nbTransition = 0;
 	private static ArrayList<Boolean> display;
+	public static double zoomActuel = 40;
 	
 	public void initialize() {
 		buttonGrille.setSelected(true);
 		zoomSlider.setValue(50);
 		
         composition = new Composition();
-        composition.setZoom(50, 0, 29);
-        grille.getChildren().add(0,composition.getGrille());
+        pane.getChildren().add(0,composition.getGrille(pane));
         StackPane.setAlignment(menuBar, Pos.TOP_LEFT);
         StackPane.setAlignment(buttonGrille, Pos.BOTTOM_RIGHT);
         StackPane.setAlignment(zoomSlider, Pos.TOP_RIGHT);
+        composition.setZoom(zoomActuel, 300, 200);
         
         zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-        	composition.setZoom((double) newValue, 0, 0);
+        	composition.setZoom((double) newValue, pane.getScene().getWindow().getWidth() / 2, pane.getScene().getWindow().getHeight() / 2);
+        	zoomActuel = (double) newValue;
         });
+        
         display = new ArrayList<>();
         display.add(true);
         ajouter(new Translation(0,0));

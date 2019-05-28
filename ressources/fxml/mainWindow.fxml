@@ -5,12 +5,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane fx:id="grille" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showCoord" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMain">
+<StackPane fx:id="grille" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showCoord" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMain">
    <children>
+      <Pane fx:id="pane" prefHeight="377.0" prefWidth="600.0" />
       <CheckBox fx:id="buttonGrille" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#apply" text="Grille">
          <StackPane.margin>
             <Insets bottom="5.0" right="5.0" />
-         </StackPane.margin></CheckBox>
+         </StackPane.margin>
+      </CheckBox>
       <MenuBar fx:id="menuBar" maxWidth="1.7976931348623157E308">
          <menus>
             <Menu mnemonicParsing="false" text="Fichier">
@@ -42,6 +44,7 @@
       <Slider fx:id="zoomSlider" max="80.0" maxHeight="-Infinity" maxWidth="-Infinity" min="20.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" value="50.0">
          <StackPane.margin>
             <Insets top="5.0" />
-         </StackPane.margin></Slider>
+         </StackPane.margin>
+      </Slider>
    </children>
 </StackPane>

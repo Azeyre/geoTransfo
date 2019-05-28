@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import controller.ControllerMain;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +26,12 @@ public class Main extends Application {
 			Parent settings = FXMLLoader.load(url);
 			primaryStage.setScene(new Scene(settings));
 			primaryStage.show();
+			primaryStage.widthProperty().addListener((obs, oldVal, newValue) -> {
+	        	ControllerMain.composition.setZoom(ControllerMain.zoomActuel, primaryStage.getWidth() / 2, primaryStage.getHeight() / 2);
+	        });
+	        primaryStage.heightProperty().addListener((obs, oldVal, newValue) -> {
+	        	ControllerMain.composition.setZoom(ControllerMain.zoomActuel, primaryStage.getWidth() / 2, primaryStage.getHeight() / 2);
+	        });
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("Echec lors du chargement du fichier ressources/fxml/mainWindow.fxml");

@@ -3,7 +3,7 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import transforms.élémentaires.Translation;
+import transforms.elementaires.Translation;
 
 public class ControllerTranslation {
 	
