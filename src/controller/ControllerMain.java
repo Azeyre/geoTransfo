@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -122,7 +123,14 @@ public class ControllerMain {
 	}
 	
 	public void matrice() {
-		System.out.println("Matrice");
+		try {
+			for(int i=0;i<nbTransition;i++) {
+            System.out.println(Arrays.deepToString(composition.getAtomicMatrix(i))); 
+			}
+            System.out.println(Arrays.deepToString(composition.getComposedMatrix(nbTransition)));
+        } catch (LibraryException e) {
+            e.printStackTrace();
+        }
 	}
 	
 	public void fenetreTranslation() {
