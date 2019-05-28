@@ -10,6 +10,7 @@ import java.util.List;
 import graphics.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -31,7 +32,6 @@ import transforms.Composition;
 import transforms.IComposition;
 import transforms.LibraryException;
 import transforms.elementaires.Transformation;
-import transforms.elementaires.Translation;
 import transforms.mobile.Motif;
 
 public class ControllerMain {
@@ -40,7 +40,6 @@ public class ControllerMain {
 	@FXML CheckBox buttonGrille;
 	@FXML StackPane grille;
 	@FXML MenuBar menuBar;
-	@FXML Pane pane;
 	@FXML HBox saisie;
 	@FXML TextField x;
 	@FXML TextField y;
@@ -52,11 +51,12 @@ public class ControllerMain {
 	public static double zoomActuel = 40;
 	public static ListView<String> list;
 	public static double xSaisie, ySaisie;
+	private static Pane pane;
 	
 	public void initialize() {
 		buttonGrille.setSelected(true);
 		zoomSlider.setValue(50);
-		
+		pane = new Pane();
         composition = new Composition();
         pane.getChildren().add(0,composition.getGrille(pane));
         StackPane.setAlignment(menuBar, Pos.TOP_LEFT);
@@ -66,15 +66,24 @@ public class ControllerMain {
         composition.setZoom(zoomActuel, 300, 200);
         
         list = new ListView<>();
+        list.setPadding(new Insets(28,0,0,0));
         list.maxWidth(200);
         list.setPrefSize(200, 300);
         pane.getChildren().add(list);
         list.setOnKeyPressed(e -> {
         	KeyCode k = e.getCode();
-        	if(k.equals(KeyCode.DELETE)) {
+        	if(k.equals(KeyCode.DELETE) && list.getSelectionModel().getSelectedIndex() != -1) {
+        		pane.getChildren().removeAll(allNodes);
         		composition.getSequence().remove(list.getSelectionModel().getSelectedIndex());
-        		list.getItems().remove(list.getSelectionModel().getSelectedIndex());
         		display.remove(list.getSelectionModel().getSelectedIndex());
+        		allNodes.remove(list.getSelectionModel().getSelectedIndex() + 1);
+        		try {
+        			allNodes = composition.draw(display);
+        		} catch (LibraryException ex) {
+        			ex.printStackTrace();
+        		}
+        		pane.getChildren().addAll(allNodes);
+        		list.getItems().remove(list.getSelectionModel().getSelectedIndex());
         		nbTransition--;
         	}
         });
@@ -104,22 +113,21 @@ public class ControllerMain {
         
         display = new ArrayList<>();
         display.add(true);
-        ajouter(new Translation(0,0));
         try {
 			allNodes = composition.draw(display);
 		} catch (LibraryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        grille.getChildren().addAll(allNodes);
+        System.out.println("Pane : " + pane.getChildren().size());
+        grille.getChildren().add(0, pane);
+        pane.getChildren().addAll(allNodes);
 	}
 	
 	public void apply() {
-		if (buttonGrille.isSelected()) {
-            pane.getChildren().addAll(allNodes);
-        } else {
-            pane.getChildren().removeAll(allNodes);
-        }
+		if(buttonGrille.isSelected()) {
+			pane.getChildren().addAll(allNodes);
+		} else pane.getChildren().removeAll(allNodes);
 	}
 	
 	public void nouveau() {
@@ -139,16 +147,17 @@ public class ControllerMain {
 	}
 	
 	public void animer() {
-		try {
-            final Motif mobile = composition.getStep(1);
+		final int firstStep = 0;
+        try {
+            final Motif mobile = composition.getStep(firstStep);
             mobile.setStroke(Color.BLUE);
-            grille.getChildren().add(mobile.toGroup());
+            pane.getChildren().add(mobile.toGroup());
             composition.animate(
                     mobile.toGroup(),
-                    1,
+                    firstStep,
                     nbTransition,
-                    e -> grille.getChildren().remove(mobile.toGroup())
-            ).play();    // Animation entre les étapes 1 et 3
+                    e -> pane.getChildren().remove(mobile.toGroup())
+            ).play();    // Animation entre les étapes firstStep et lastStep
         } catch (LibraryException e) {
             e.printStackTrace();
         }
@@ -226,6 +235,7 @@ public class ControllerMain {
     }
 	
 	public static void ajouter(Transformation t) {
+		pane.getChildren().removeAll(allNodes);
 		nbTransition++;
 		composition.add(t);
 		list.getItems().add(t.toString());
@@ -235,5 +245,8 @@ public class ControllerMain {
 		} catch (LibraryException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Nodes : " + allNodes.size());
+		pane.getChildren().addAll(allNodes);
+		System.out.println("Pane : " + pane.getChildren().size());
 	}
 }
