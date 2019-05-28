@@ -63,6 +63,7 @@ public class ControllerMain {
         	if(k.equals(KeyCode.DELETE)) {
         		composition.getSequence().remove(list.getSelectionModel().getSelectedIndex());
         		list.getItems().remove(list.getSelectionModel().getSelectedIndex());
+        		display.remove(list.getSelectionModel().getSelectedIndex());
         		nbTransition--;
         	}
         });
