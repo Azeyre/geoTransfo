@@ -17,8 +17,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -38,13 +40,17 @@ public class ControllerMain {
 	@FXML StackPane grille;
 	@FXML MenuBar menuBar;
 	@FXML Pane pane;
-
+	@FXML HBox saisie;
+	@FXML TextField x;
+	@FXML TextField y;
+	
 	public static IComposition composition;
 	private static List<Node> allNodes;
 	private static int nbTransition = 0;
 	private static ArrayList<Boolean> display;
 	public static double zoomActuel = 40;
 	public static ListView<String> list;
+	public static double xSaisie, ySaisie;
 	
 	public void initialize() {
 		buttonGrille.setSelected(true);
@@ -55,9 +61,12 @@ public class ControllerMain {
         StackPane.setAlignment(menuBar, Pos.TOP_LEFT);
         StackPane.setAlignment(buttonGrille, Pos.BOTTOM_RIGHT);
         StackPane.setAlignment(zoomSlider, Pos.TOP_RIGHT);
+        StackPane.setAlignment(saisie, Pos.BOTTOM_LEFT);
         composition.setZoom(zoomActuel, 300, 200);
         
         list = new ListView<>();
+        list.maxWidth(200);
+        list.setPrefSize(200, 300);
         pane.getChildren().add(list);
         list.setOnKeyPressed(e -> {
         	KeyCode k = e.getCode();
@@ -72,6 +81,24 @@ public class ControllerMain {
         zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
         	composition.setZoom((double) newValue, pane.getScene().getWindow().getWidth() / 2, pane.getScene().getWindow().getHeight() / 2);
         	zoomActuel = (double) newValue;
+        });
+        
+        x.textProperty().addListener((observable, oldValue, newValue) -> {
+        	if(!newValue.matches("[\\-]?[0-9]*[\\.]?[0-9]*")) {
+        		x.setText(oldValue);
+            } else {
+            	xSaisie = Double.valueOf(newValue);
+            	System.out.println("X:" + xSaisie);
+            }
+        });
+        
+        y.textProperty().addListener((observable, oldValue, newValue) -> {
+        	if(!newValue.matches("[\\-]?[0-9]*[\\.]?[0-9]*")) {
+        		y.setText(oldValue);
+            } else {
+            	ySaisie = Double.valueOf(newValue);
+            	System.out.println("Y:" + ySaisie);
+            }
         });
         
         display = new ArrayList<>();
@@ -187,11 +214,10 @@ public class ControllerMain {
 	}
 	
 	public void showCoord(MouseEvent mouseEvent) {
-		Stage stage = (Stage) zoomSlider.getScene().getWindow();
         double xMouse = mouseEvent.getX();
         double yMouse = mouseEvent.getY();
-        System.out.println("X vaut : " + composition.xMouseToMath(xMouse));
-        System.out.println("Y vaut : " + composition.yMouseToMath(yMouse));
+        x.setText("" + composition.xMouseToMath(xMouse));
+        y.setText("" + composition.yMouseToMath(yMouse));
     }
 	
 	public static void ajouter(Transformation t) {

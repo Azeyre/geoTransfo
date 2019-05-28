@@ -46,5 +46,16 @@
             <Insets top="5.0" />
          </StackPane.margin>
       </Slider>
+      <HBox fx:id="saisie" alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" spacing="5.0">
+         <children>
+            <Label text="X : " />
+            <TextField prefHeight="25.0" prefWidth="40.0" fx:id="x" />
+            <Label text="Y : " />
+            <TextField fx:id="y" prefHeight="25.0" prefWidth="40.0" />
+         </children>
+         <StackPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </StackPane.margin>
+      </HBox>
    </children>
 </StackPane>
