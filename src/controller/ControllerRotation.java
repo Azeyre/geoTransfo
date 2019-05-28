@@ -16,6 +16,11 @@ public class ControllerRotation {
 	@FXML TextField X;
 	@FXML TextField Y;
 	
+	public void initialize() {
+		X.setText(""+ControllerMain.xSaisie);
+		Y.setText(""+ControllerMain.ySaisie);
+	}
+	
 	public void apply() {
 		try {
 			double degres = Double.valueOf(rotation.getText());

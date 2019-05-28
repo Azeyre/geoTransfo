@@ -16,6 +16,11 @@ public class ControllerHomothetie {
 	@FXML TextField distance;
 	@FXML Label erreur;
 	
+	public void initialize() {
+		X.setText(""+ControllerMain.xSaisie);
+		Y.setText(""+ControllerMain.ySaisie);
+	}
+	
 	public void apply() {
 		try {
 			double dist = Double.valueOf(distance.getText());

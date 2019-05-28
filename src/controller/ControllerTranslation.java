@@ -13,6 +13,11 @@ public class ControllerTranslation {
 	@FXML TextField Y;
 	@FXML Label erreur;
 	
+	public void initialize() {
+		X.setText(""+ControllerMain.xSaisie);
+		Y.setText(""+ControllerMain.ySaisie);
+	}
+	
 	public void apply() {
 		try {
 			double x = Double.valueOf(X.getText());
