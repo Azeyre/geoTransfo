@@ -13,10 +13,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Slider;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -42,6 +43,7 @@ public class ControllerMain {
 	private static int nbTransition = 0;
 	private static ArrayList<Boolean> display;
 	public static double zoomActuel = 40;
+	public static ListView<String> list;
 	
 	public void initialize() {
 		buttonGrille.setSelected(true);
@@ -53,6 +55,17 @@ public class ControllerMain {
         StackPane.setAlignment(buttonGrille, Pos.BOTTOM_RIGHT);
         StackPane.setAlignment(zoomSlider, Pos.TOP_RIGHT);
         composition.setZoom(zoomActuel, 300, 200);
+        
+        list = new ListView<>();
+        pane.getChildren().add(list);
+        list.setOnKeyPressed(e -> {
+        	KeyCode k = e.getCode();
+        	if(k.equals(KeyCode.DELETE)) {
+        		composition.getSequence().remove(list.getSelectionModel().getSelectedIndex());
+        		list.getItems().remove(list.getSelectionModel().getSelectedIndex());
+        		nbTransition--;
+        	}
+        });
         
         zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
         	composition.setZoom((double) newValue, pane.getScene().getWindow().getWidth() / 2, pane.getScene().getWindow().getHeight() / 2);
@@ -166,8 +179,8 @@ public class ControllerMain {
 	
 	public void showCoord(MouseEvent mouseEvent) {
 		Stage stage = (Stage) zoomSlider.getScene().getWindow();
-        double xMouse = mouseEvent.getX() - stage.getWidth() / 2;
-        double yMouse = mouseEvent.getY() - stage.getHeight() / 2 + 29;
+        double xMouse = mouseEvent.getX();
+        double yMouse = mouseEvent.getY();
         System.out.println("X vaut : " + composition.xMouseToMath(xMouse));
         System.out.println("Y vaut : " + composition.yMouseToMath(yMouse));
     }
@@ -175,6 +188,7 @@ public class ControllerMain {
 	public static void ajouter(Transformation t) {
 		nbTransition++;
 		composition.add(t);
+		list.getItems().add(t.toString());
 		display.add(true);
 		try {
 			allNodes = composition.draw(display);
