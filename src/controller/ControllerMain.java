@@ -142,14 +142,6 @@ public class ControllerMain {
         grille.getChildren().add(0, pane);
         pane.getChildren().addAll(allNodes);
         
-        pane.setOnMouseDragged(e -> {
-        	zoomX -= lastX - e.getX();
-        	zoomY -= lastY - e.getY();
-        	composition.setZoom(zoomActuel, zoomX, zoomY);
-        	lastX = e.getX();
-        	lastY = e.getY();
-        });
-        
         pane.setOnMousePressed(e -> {
         	pane.getScene().setCursor(Cursor.CLOSED_HAND);
         	lastX = e.getX();
@@ -158,6 +150,14 @@ public class ControllerMain {
         
         pane.setOnMouseReleased(e -> {
         	pane.getScene().setCursor(Cursor.DEFAULT);
+        });
+        
+        pane.setOnMouseDragged(e -> {
+        	zoomX -= lastX - e.getX();
+        	zoomY -= lastY - e.getY();
+        	composition.setZoom(zoomActuel, zoomX, zoomY);
+        	lastX = e.getX();
+        	lastY = e.getY();
         });
 	}
 	
