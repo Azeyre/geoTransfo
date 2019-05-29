@@ -161,11 +161,13 @@ public class ControllerMain {
         });
         
         pane.setOnScroll(e -> {
-        	if(e.getDeltaY() > 0 && zoomActuel < 90) {
+        	if(e.getDeltaY() > 0 && zoomActuel < zoomSlider.getMax() + 2) {
         		zoomActuel += 2;
+        		zoomSlider.setValue(zoomActuel);
         		composition.setZoom(zoomActuel, zoomX, zoomY);
-        	} else if(e.getDeltaY() < 0 && zoomActuel > 10) {
+        	} else if(e.getDeltaY() < 0 && zoomActuel > zoomSlider.getMin() + 2) {
         		zoomActuel -= 2;
+        		zoomSlider.setValue(zoomActuel);
         		composition.setZoom(zoomActuel, zoomX, zoomY);
         	}
         });
