@@ -19,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.RadioMenuItem;
@@ -123,6 +124,8 @@ public class ControllerMain {
             	ySaisie = Double.valueOf(newValue);
             }
         });
+        
+        list.setPlaceholder(new Label("Historique vide...\n(Ctrl + Clic multiselection)"));
         
         display = new ArrayList<>();
         display.add(true);
