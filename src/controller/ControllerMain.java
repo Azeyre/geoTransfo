@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -63,6 +64,8 @@ public class ControllerMain {
 	public static double xSaisie, ySaisie;
 	private static Pane pane;
 	public static String matrices;
+	private double lastX, lastY;
+	private double zoomX = 300, zoomY = 200;
 	
 	public void initialize() {
 		buttonGrille.setSelected(true);
@@ -74,7 +77,7 @@ public class ControllerMain {
         StackPane.setAlignment(buttonGrille, Pos.BOTTOM_RIGHT);
         StackPane.setAlignment(zoomSlider, Pos.TOP_RIGHT);
         StackPane.setAlignment(saisie, Pos.BOTTOM_LEFT);
-        composition.setZoom(zoomActuel, 300, 200);
+        composition.setZoom(zoomActuel, zoomX, zoomY);
         
         list = new ListView<>();
         list.setPadding(new Insets(28,0,0,0));
@@ -138,6 +141,24 @@ public class ControllerMain {
         System.out.println("Pane : " + pane.getChildren().size());
         grille.getChildren().add(0, pane);
         pane.getChildren().addAll(allNodes);
+        
+        pane.setOnMouseDragged(e -> {
+        	zoomX -= lastX - e.getX();
+        	zoomY -= lastY - e.getY();
+        	composition.setZoom(zoomActuel, zoomX, zoomY);
+        	lastX = e.getX();
+        	lastY = e.getY();
+        });
+        
+        pane.setOnMousePressed(e -> {
+        	pane.getScene().setCursor(Cursor.CLOSED_HAND);
+        	lastX = e.getX();
+        	lastY = e.getY();
+        });
+        
+        pane.setOnMouseReleased(e -> {
+        	pane.getScene().setCursor(Cursor.DEFAULT);
+        });
 	}
 	
 	public void apply() {
