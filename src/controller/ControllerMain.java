@@ -138,7 +138,6 @@ public class ControllerMain {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        System.out.println("Pane : " + pane.getChildren().size());
         grille.getChildren().add(0, pane);
         pane.getChildren().addAll(allNodes);
         
