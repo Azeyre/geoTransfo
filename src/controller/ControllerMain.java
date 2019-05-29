@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import forme.Carre;
 import graphics.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +36,7 @@ import transforms.IComposition;
 import transforms.LibraryException;
 import transforms.elementaires.Transformation;
 import transforms.mobile.Motif;
+import transforms.mobile.MotifConcret;
 
 public class ControllerMain {
 	
@@ -245,7 +247,15 @@ public class ControllerMain {
 	}
 	
 	public void ajoutCarre() {
-		
+		MotifConcret mc = new Carre(this.composition);
+		composition.setMotif(mc);
+		pane.getChildren().removeAll(allNodes);
+		try {
+			allNodes = composition.draw(display);
+		} catch (LibraryException e) {
+			e.printStackTrace();
+		}
+		pane.getChildren().addAll(allNodes);
 	}
 	
 	public void showCoord(MouseEvent mouseEvent) {
