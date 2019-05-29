@@ -159,6 +159,16 @@ public class ControllerMain {
         	lastX = e.getX();
         	lastY = e.getY();
         });
+        
+        pane.setOnScroll(e -> {
+        	if(e.getDeltaY() > 0 && zoomActuel < 90) {
+        		zoomActuel += 2;
+        		composition.setZoom(zoomActuel, zoomX, zoomY);
+        	} else if(e.getDeltaY() < 0 && zoomActuel > 10) {
+        		zoomActuel -= 2;
+        		composition.setZoom(zoomActuel, zoomX, zoomY);
+        	}
+        });
 	}
 	
 	public void apply() {
