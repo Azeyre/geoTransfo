@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 import controller.ControllerMain;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
