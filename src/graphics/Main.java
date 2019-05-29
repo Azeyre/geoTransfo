@@ -25,6 +25,7 @@ public class Main extends Application {
 			URL url = new File("ressources/fxml/mainWindow.fxml").toURL();
 			Parent settings = FXMLLoader.load(url);
 			primaryStage.setScene(new Scene(settings));
+			primaryStage.setTitle("GeoTransfo");
 			primaryStage.show();
 			primaryStage.widthProperty().addListener((obs, oldVal, newValue) -> {
 	        	ControllerMain.composition.setZoom(ControllerMain.zoomActuel, primaryStage.getWidth() / 2, primaryStage.getHeight() / 2);
