@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import forme.Carre;
+import forme.Triangle;
 import graphics.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -35,6 +37,8 @@ import transforms.Composition;
 import transforms.IComposition;
 import transforms.LibraryException;
 import transforms.elementaires.Transformation;
+import transforms.mobile.Maison;
+import transforms.mobile.MaisonSansPorte;
 import transforms.mobile.Motif;
 import transforms.mobile.MotifConcret;
 
@@ -47,6 +51,7 @@ public class ControllerMain {
 	@FXML HBox saisie;
 	@FXML TextField x;
 	@FXML TextField y;
+	@FXML RadioMenuItem menuHistorique;
 	
 	public static IComposition composition;
 	private static List<Node> allNodes;
@@ -108,7 +113,6 @@ public class ControllerMain {
         		x.setText(oldValue);
             } else {
             	xSaisie = Double.valueOf(newValue);
-            	System.out.println("X:" + xSaisie);
             }
         });
         
@@ -117,7 +121,6 @@ public class ControllerMain {
         		y.setText(oldValue);
             } else {
             	ySaisie = Double.valueOf(newValue);
-            	System.out.println("Y:" + ySaisie);
             }
         });
         
@@ -174,12 +177,14 @@ public class ControllerMain {
 	}
 	
 	public void matrice() {
+		List<Integer> listeSelectionnes = list.getSelectionModel().getSelectedIndices();
+		matrices = "";
 		try {
-			/*for(int i=0;i<nbTransition;i++) {
-            System.out.println(Arrays.deepToString(composition.getAtomicMatrix(i))); 
-			}*/
-            System.out.println(Arrays.deepToString(composition.getComposedMatrix(nbTransition)));
-            matrices = Arrays.deepToString(composition.getComposedMatrix(nbTransition));
+			if(listeSelectionnes.size() != 0) {
+				for(Integer i: listeSelectionnes) {
+					matrices += "Transformation n°" + (i+1)  + " : " + Arrays.deepToString(composition.getAtomicMatrix(i)) + "\n";
+				}
+			} else matrices = "Toutes les transformations : " + Arrays.deepToString(composition.getComposedMatrix(nbTransition));
         } catch (LibraryException e) {
             e.printStackTrace();
         }
@@ -242,13 +247,7 @@ public class ControllerMain {
 		}
 	}
 	
-	public void ajoutPoint() {
-		
-	}
-	
-	public void ajoutCarre() {
-		MotifConcret mc = new Carre(this.composition);
-		composition.setMotif(mc);
+	private void redraw() {
 		pane.getChildren().removeAll(allNodes);
 		try {
 			allNodes = composition.draw(display);
@@ -256,6 +255,27 @@ public class ControllerMain {
 			e.printStackTrace();
 		}
 		pane.getChildren().addAll(allNodes);
+	}
+	
+	public void afficherHistorique() {
+		if(menuHistorique.isSelected()) {
+			pane.getChildren().add(list);
+		} else pane.getChildren().remove(list);
+	}
+	
+	public void maison() {
+		composition.setMotif(new Maison((Composition) this.composition));
+		redraw();
+	}
+	
+	public void carre() {
+		composition.setMotif(new Carre(this.composition));
+		redraw();
+	}
+	
+	public void triangle() {
+		composition.setMotif(new Triangle(this.composition));
+		redraw();
 	}
 	
 	public void showCoord(MouseEvent mouseEvent) {

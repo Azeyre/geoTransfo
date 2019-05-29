@@ -7,7 +7,7 @@
 
 <StackPane fx:id="grille" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#showCoord" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMain">
    <children>
-      <CheckBox fx:id="buttonGrille" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#apply" text="Grille">
+      <CheckBox fx:id="buttonGrille" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#apply" text="Affichage">
          <StackPane.margin>
             <Insets bottom="5.0" right="5.0" />
          </StackPane.margin>
@@ -29,12 +29,14 @@
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#animer" text="Animation" />
                   <MenuItem mnemonicParsing="false" onAction="#matrice" text="Matrice" />
+                  <RadioMenuItem fx:id="menuHistorique" mnemonicParsing="false" onAction="#afficherHistorique" selected="true" text="Historique" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Objet">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#ajoutPoint" text="Point" />
-                  <MenuItem mnemonicParsing="false" onAction="#ajoutCarre" text="Carré" />
+                  <MenuItem mnemonicParsing="false" onAction="#maison" text="Maison" />
+                  <MenuItem mnemonicParsing="false" onAction="#carre" text="Carré" />
+                  <MenuItem mnemonicParsing="false" onAction="#triangle" text="Triangle" />
                </items>
             </Menu>
          </menus>
